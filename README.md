@@ -1,4 +1,4 @@
-# Redis Live Collection
+# Redis Live Collection [![npm version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]
 
 Redis-based realtime collection with compare-and-set support for NodeJS.
 
@@ -536,3 +536,8 @@ Start Redis:
 Run tests:
 
     yarn test
+
+[npm-image]: https://badge.fury.io/js/redis-live-collection.svg
+[npm-url]: https://badge.fury.io/js/redis-live-collection
+[travis-image]: https://travis-ci.org/aikoven/redis-live-collection.svg?branch=master
+[travis-url]: https://travis-ci.org/aikoven/redis-live-collection
