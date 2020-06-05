@@ -24,6 +24,7 @@ Redis-based realtime collection with compare-and-set support for NodeJS.
   - [removeVersionRange](#removeversionrange)
   - [makePrefixRange](#makeprefixrange)
   - [initCommands](#initcommands)
+- [Development](#development)
 
 <!-- /TOC -->
 
@@ -525,3 +526,13 @@ function initCommands(redis: IORedis.Redis): void;
 ```
 
 Enable collection operations on `ioredis` instance by defining Lua commands.
+
+## Development
+
+Start Redis:
+
+    docker-compose up -d
+
+Run tests:
+
+    yarn test
