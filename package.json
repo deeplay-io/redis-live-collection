@@ -4,7 +4,7 @@
   "description": "Redis-based realtime collection with compare-and-set support",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
-  "repository": "aikoven/redis-live-collection",
+  "repository": "deeplay-io/redis-live-collection",
   "files": [
     "src",
     "lib"
