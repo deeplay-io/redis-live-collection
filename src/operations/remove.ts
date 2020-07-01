@@ -28,6 +28,18 @@ declare module 'ioredis' {
     ): Promise<[Buffer]>;
   }
 
+  interface Cluster {
+    lcRemoveBuffer(
+      valuesKey: string,
+      keysKey: string,
+      versionsKey: string,
+      changesKey: string,
+      revisionKey: string,
+      key: string | Buffer,
+      maxlen: number,
+    ): Promise<[Buffer]>;
+  }
+
   interface Pipeline {
     lcRemoveBuffer(
       valuesKey: string,
@@ -42,7 +54,7 @@ declare module 'ioredis' {
   }
 }
 
-export function defineRemoveCommand(redis: IORedis.Redis) {
+export function defineRemoveCommand(redis: IORedis.Redis | IORedis.Cluster) {
   redis.defineCommand('lcRemove', definition);
 }
 

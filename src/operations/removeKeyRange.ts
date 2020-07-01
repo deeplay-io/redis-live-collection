@@ -29,6 +29,19 @@ declare module 'ioredis' {
     ): Promise<[Buffer, number]>;
   }
 
+  interface Cluster {
+    lcRemoveKeyRangeBuffer(
+      valuesKey: string,
+      keysKey: string,
+      versionsKey: string,
+      changesKey: string,
+      revisionKey: string,
+      min: string | Buffer,
+      max: string | Buffer,
+      maxlen: number,
+    ): Promise<[Buffer, number]>;
+  }
+
   interface Pipeline {
     lcRemoveKeyRangeBuffer(
       valuesKey: string,
@@ -44,7 +57,7 @@ declare module 'ioredis' {
   }
 }
 
-export function defineRemoveKeyRangeCommand(redis: IORedis.Redis) {
+export function defineRemoveKeyRangeCommand(redis: IORedis.Redis | IORedis.Cluster) {
   redis.defineCommand('lcRemoveKeyRange', definition);
 }
 

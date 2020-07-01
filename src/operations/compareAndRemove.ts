@@ -31,6 +31,20 @@ declare module 'ioredis' {
     ): Promise<[Buffer, null | 1]>;
   }
 
+  interface Cluster {
+    lcCompareAndRemoveBuffer(
+      valuesKey: string,
+      keysKey: string,
+      versionsKey: string,
+      changesKey: string,
+      revisionKey: string,
+      key: string | Buffer,
+      compareOperator: string,
+      compareVersion: string,
+      maxlen: number,
+    ): Promise<[Buffer, null | 1]>;
+  }
+
   interface Pipeline {
     lcCompareAndRemoveBuffer(
       valuesKey: string,
@@ -47,7 +61,7 @@ declare module 'ioredis' {
   }
 }
 
-export function defineCompareAndRemoveCommand(redis: IORedis.Redis) {
+export function defineCompareAndRemoveCommand(redis: IORedis.Redis | IORedis.Cluster) {
   redis.defineCommand('lcCompareAndRemove', definition);
 }
 
