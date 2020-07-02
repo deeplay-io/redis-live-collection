@@ -87,7 +87,7 @@ export function transformGetVersionRangeReply(
 }
 
 export function getVersionRange(
-  redis: IORedis.Redis,
+  redis: IORedis.Redis | IORedis.Cluster,
   collection: string,
   min: number | string,
   max: number | string,

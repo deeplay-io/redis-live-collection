@@ -4,7 +4,7 @@ import {ChangeEvent, changeEventFromEntry} from '../changeEvents';
 import {getKey, CHANGES_STREAM_SUFFIX} from '../keys';
 
 export function watch(
-  redis: IORedis.Redis,
+  redis: IORedis.Redis | IORedis.Cluster,
   collection: string,
   lastRevision: string,
   blockMs: number = 2500,

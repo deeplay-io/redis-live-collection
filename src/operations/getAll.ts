@@ -1,4 +1,4 @@
-import {Redis} from 'ioredis';
+import IORedis = require('ioredis');
 import {
   VALUES_HASH_SUFFIX,
   VERSIONS_SORTED_SET_SUFFIX,
@@ -14,7 +14,7 @@ export type GetAllResult = {
 };
 
 export async function getAll(
-  redis: Redis,
+  redis: IORedis.Redis | IORedis.Cluster,
   collection: string,
 ): Promise<GetAllResult> {
   const [

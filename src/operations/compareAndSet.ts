@@ -112,7 +112,7 @@ export function transformCompareAndSetReply(
 }
 
 export function compareAndSet(
-  redis: IORedis.Redis,
+  redis: IORedis.Redis | IORedis.Cluster,
   collection: string,
   key: string | Buffer,
   compareOperator: CompareOperator,

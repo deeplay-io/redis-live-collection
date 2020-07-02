@@ -97,7 +97,7 @@ export function transformRemoveVersionRangeReply(
 }
 
 export function removeVersionRange(
-  redis: IORedis.Redis,
+  redis: IORedis.Redis | IORedis.Cluster,
   collection: string,
   min: number | string,
   max: number | string,

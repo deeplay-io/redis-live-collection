@@ -96,7 +96,7 @@ export function transformRemoveKeyRangeReply(
 }
 
 export function removeKeyRange(
-  redis: IORedis.Redis,
+  redis: IORedis.Redis | IORedis.Cluster,
   collection: string,
   min: string | Buffer,
   max: string | Buffer,

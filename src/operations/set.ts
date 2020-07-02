@@ -98,7 +98,7 @@ export function transformSetReply(reply: [Buffer]): SetResult {
 }
 
 export function set(
-  redis: IORedis.Redis,
+  redis: IORedis.Redis | IORedis.Cluster,
   collection: string,
   key: string | Buffer,
   value: Buffer,

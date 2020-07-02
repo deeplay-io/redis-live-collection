@@ -92,7 +92,7 @@ export function transformGetKeyRangeReply(
 }
 
 export function getKeyRange(
-  redis: IORedis.Redis,
+  redis: IORedis.Redis | IORedis.Cluster,
   collection: string,
   min: string | Buffer,
   max: string | Buffer,

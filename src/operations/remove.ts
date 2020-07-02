@@ -87,7 +87,7 @@ export function transformRemoveReply(reply: [Buffer]): RemoveResult {
 }
 
 export function remove(
-  redis: IORedis.Redis,
+  redis: IORedis.Redis | IORedis.Cluster,
   collection: string,
   key: string | Buffer,
   maxlen: number = 1000,
