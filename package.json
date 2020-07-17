@@ -1,6 +1,6 @@
 {
   "name": "redis-live-collection",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Redis-based realtime collection with compare-and-set support",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
