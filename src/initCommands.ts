@@ -9,7 +9,7 @@ import {defineGetKeyRangeCommand} from './operations/getKeyRange';
 import {defineRemoveKeyRangeCommand} from './operations/removeKeyRange';
 import {defineRemoveVersionRangeCommand} from './operations/removeVersionRange';
 
-export function initCommands(redis: IORedis.Redis): void {
+export function initCommands(redis: IORedis.Cluster | IORedis.Redis): void {
   defineGetCommand(redis);
   defineSetCommand(redis);
   defineCompareAndSetCommand(redis);

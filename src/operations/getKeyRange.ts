@@ -28,6 +28,17 @@ declare module 'ioredis' {
     ): Promise<[Buffer, Array<[Buffer, Buffer, Buffer]>]>;
   }
 
+  interface Cluster {
+    lcGetKeyRangeBuffer(
+      valuesKey: string,
+      keysKey: string,
+      versionsKey: string,
+      revisionKey: string,
+      min: string | Buffer,
+      max: string | Buffer,
+    ): Promise<[Buffer, Array<[Buffer, Buffer, Buffer]>]>;
+  }
+
   interface Pipeline {
     lcGetKeyRangeBuffer(
       valuesKey: string,
@@ -41,7 +52,7 @@ declare module 'ioredis' {
   }
 }
 
-export function defineGetKeyRangeCommand(redis: IORedis.Redis) {
+export function defineGetKeyRangeCommand(redis: IORedis.Redis | IORedis.Cluster) {
   redis.defineCommand('lcGetKeyRange', definition);
 }
 
@@ -81,7 +92,7 @@ export function transformGetKeyRangeReply(
 }
 
 export function getKeyRange(
-  redis: IORedis.Redis,
+  redis: IORedis.Redis | IORedis.Cluster,
   collection: string,
   min: string | Buffer,
   max: string | Buffer,

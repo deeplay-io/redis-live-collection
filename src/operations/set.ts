@@ -31,6 +31,20 @@ declare module 'ioredis' {
     ): Promise<[Buffer]>;
   }
 
+  interface Cluster {
+    lcSetBuffer(
+      valuesKey: string,
+      keysKey: string,
+      versionsKey: string,
+      changesKey: string,
+      revisionKey: string,
+      key: string | Buffer,
+      value: Buffer,
+      version: string,
+      maxlen: number,
+    ): Promise<[Buffer]>;
+  }
+
   interface Pipeline {
     lcSetBuffer(
       valuesKey: string,
@@ -47,7 +61,7 @@ declare module 'ioredis' {
   }
 }
 
-export function defineSetCommand(redis: IORedis.Redis) {
+export function defineSetCommand(redis: IORedis.Redis | IORedis.Cluster) {
   redis.defineCommand('lcSet', definition);
 }
 
@@ -84,7 +98,7 @@ export function transformSetReply(reply: [Buffer]): SetResult {
 }
 
 export function set(
-  redis: IORedis.Redis,
+  redis: IORedis.Redis | IORedis.Cluster,
   collection: string,
   key: string | Buffer,
   value: Buffer,

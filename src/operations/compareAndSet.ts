@@ -33,6 +33,22 @@ declare module 'ioredis' {
     ): Promise<[Buffer, null | 1]>;
   }
 
+  interface Cluster {
+    lcCompareAndSetBuffer(
+      valuesKey: string,
+      keysKey: string,
+      versionsKey: string,
+      changesKey: string,
+      revisionKey: string,
+      key: string | Buffer,
+      compareOperator: string,
+      compareVersion: string,
+      value: Buffer,
+      version: string,
+      maxlen: number,
+    ): Promise<[Buffer, null | 1]>;
+  }
+
   interface Pipeline {
     lcCompareAndSetBuffer(
       valuesKey: string,
@@ -51,7 +67,7 @@ declare module 'ioredis' {
   }
 }
 
-export function defineCompareAndSetCommand(redis: IORedis.Redis) {
+export function defineCompareAndSetCommand(redis: IORedis.Redis | IORedis.Cluster) {
   redis.defineCommand('lcCompareAndSet', definition);
 }
 
@@ -96,7 +112,7 @@ export function transformCompareAndSetReply(
 }
 
 export function compareAndSet(
-  redis: IORedis.Redis,
+  redis: IORedis.Redis | IORedis.Cluster,
   collection: string,
   key: string | Buffer,
   compareOperator: CompareOperator,

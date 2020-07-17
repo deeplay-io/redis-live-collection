@@ -24,6 +24,15 @@ declare module 'ioredis' {
     ): Promise<[Buffer, Buffer?, Buffer?]>;
   }
 
+  interface Cluster {
+    lcGetBuffer(
+      valuesKey: string,
+      versionsKey: string,
+      revisionKey: string,
+      key: string | Buffer,
+    ): Promise<[Buffer, Buffer?, Buffer?]>;
+  }
+
   interface Pipeline {
     lcGetBuffer(
       valuesKey: string,
@@ -35,7 +44,7 @@ declare module 'ioredis' {
   }
 }
 
-export function defineGetCommand(redis: IORedis.Redis) {
+export function defineGetCommand(redis: IORedis.Redis | IORedis.Cluster) {
   redis.defineCommand('lcGet', definition);
 }
 

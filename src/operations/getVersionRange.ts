@@ -26,6 +26,16 @@ declare module 'ioredis' {
     ): Promise<[Buffer, Array<[Buffer, Buffer, Buffer]>]>;
   }
 
+  interface Cluster {
+    lcGetVersionRangeBuffer(
+      valuesKey: string,
+      versionsKey: string,
+      revisionKey: string,
+      min: string,
+      max: string,
+    ): Promise<[Buffer, Array<[Buffer, Buffer, Buffer]>]>;
+  }
+
   interface Pipeline {
     lcGetVersionRangeBuffer(
       valuesKey: string,
@@ -38,7 +48,7 @@ declare module 'ioredis' {
   }
 }
 
-export function defineGetVersionRangeCommand(redis: IORedis.Redis) {
+export function defineGetVersionRangeCommand(redis: IORedis.Redis | IORedis.Cluster) {
   redis.defineCommand('lcGetVersionRange', definition);
 }
 
@@ -77,7 +87,7 @@ export function transformGetVersionRangeReply(
 }
 
 export function getVersionRange(
-  redis: IORedis.Redis,
+  redis: IORedis.Redis | IORedis.Cluster,
   collection: string,
   min: number | string,
   max: number | string,
