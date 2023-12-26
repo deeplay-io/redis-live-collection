@@ -7,15 +7,31 @@ local min = ARGV[1]
 local max = ARGV[2]
 local streamMaxLen = ARGV[3]
 
+local function massive_redis_command(command, key, t)
+    local i = 1
+    local temp = {}
+    while(i <= #t) do
+        table.insert(temp, t[i+1])
+        table.insert(temp, t[i])
+        if #temp >= 1000 then
+            redis.call(command, key, unpack(temp))
+            temp = {}
+        end
+        i = i+2
+    end
+    if #temp > 0 then
+        redis.call(command, key, unpack(temp))
+    end
+end
+
 local currentRevision = redis.call('GET', revisionKey) or '0-0'
 
 local range = redis.call('ZRANGEBYSCORE', versionsSortedSetKey, min, max)
 
 if #range == 0 then return {currentRevision, 0} end
-
-redis.call('HDEL', valuesHashKey, unpack(range))
-redis.call('ZREM', keysSortedSetKey, unpack(range))
-redis.call('ZREM', versionsSortedSetKey, unpack(range))
+massive_redis_command('HDEL', valuesHashKey, range)
+massive_redis_command('ZREM', keysSortedSetKey, range)
+massive_redis_command('ZREM', versionsSortedSetKey, range)
 
 local revision = currentRevision
 
